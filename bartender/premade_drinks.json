@@ -1,0 +1,23 @@
+{
+	"screwdriver": {
+		"ingredients": ["vodka","orange juice"]
+	},
+	"mimosa": {
+		"ingredients": ["champange","orange juice"]
+	},
+	"rum & coke": {
+		"ingredients": ["rum","coke"]
+	},
+	"whiskey coke": {
+		"ingredients": ["whiskey","coke"]
+	},
+	"gin n tonic": {
+		"ingredients": ["gin","tonic"]
+	},
+	"white girl": {
+		"ingredients": ["vodka","sparkeling water"]
+    },
+    "basic bitch": {
+		"ingredients": ["vodka","club soda"]
+	}
+}
