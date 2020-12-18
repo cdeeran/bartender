@@ -1,20 +1,22 @@
 
+
 import hardware
-import bartender
 import json
 import sys
-import os
-from PyQt5.QtWidgets import QApplication, QCheckBox, QListWidgetItem, QMainWindow
+from PyQt5.QtWidgets import QApplication, QCheckBox, QLabel, QListWidgetItem, QMainWindow
+from bartender.thread_manager import ThreadManager
+from PyQt5.QtCore import pyqtSignal
 
-# import everything from the UI
+# import everything from the UIs
 from ui.bartenderGui import *
-
 class Bartender(QMainWindow):
 
     def __init__(self) -> None:
         super().__init__()
         self.gui = Ui_MainWindow()
         self.gui.setupUi(self)
+        self.gui.progressBar.hide()
+        self.gui.progressStatus.setText("")
         self.pumpConfiguration = None
         self.premadeDrinks = {}
         self.setupBarKeep()
@@ -41,7 +43,7 @@ class Bartender(QMainWindow):
         '''
         self.updatePremadeDrinkList()
 
-        self.gui.gitlit_button.clicked
+        self.gui.gitlit_button.clicked.connect(self.gitLitClicked)
 
 
     def dumpPumpConfiguration(self) -> None:
@@ -57,7 +59,6 @@ class Bartender(QMainWindow):
         the pump configuration.
         '''
         tempjson = json.load(open("./bartender/premade_drinks.json"))
-        tempDictionary = {}
         for drink, ingredient in tempjson.items():
             ingredientCount = 0
             for pump, value in self.pumpConfiguration.items():
@@ -71,8 +72,38 @@ class Bartender(QMainWindow):
         checkbox.adjustSize()
 
     def updatePremadeDrinkList(self):
-        for key,val in self.premadeDrinks.items():
+        for key in self.premadeDrinks.keys():
             self.gui.listWidget.addItem(QListWidgetItem(key))
+
+    def gitLitClicked(self):
+        self.gui.progressBar.show()
+        self.gitlitThread = ThreadManager()
+        self.gitlitThread.count.connect(self.updateDrinkProgress)
+        self.gitlitThread.start()
+
+    def updateDrinkProgress(self,value) -> None:
+        self.gui.progressBar.setValue(value)
+
+        if value <= 10:
+            self.updateDrinkProgressStatus(self.gui.progressStatus,"Getting bartender's attention...")
+        elif value > 10 and value <= 20:
+            self.updateDrinkProgressStatus(self.gui.progressStatus,"Placing order with bartender...")
+        elif value > 20 and value <= 50:
+            self.updateDrinkProgressStatus(self.gui.progressStatus,"Getting ingredients together...")
+        elif value > 50 and value <= 60:
+            self.updateDrinkProgressStatus(self.gui.progressStatus,"Talking with other people instead of pouring your drink...")
+        elif value > 60 and value <= 80:
+            self.updateDrinkProgressStatus(self.gui.progressStatus,"Pouring your drink...")
+        elif value > 80 and value <= 90:
+            self.updateDrinkProgressStatus(self.gui.progressStatus,"Walking drink over to you...")
+        elif value > 90 and value <= 99:
+            self.updateDrinkProgressStatus(self.gui.progressStatus,"Checking you out ;) ...")
+        else:
+            self.updateDrinkProgressStatus(self.gui.progressStatus,"Order complete! Thank you!")
+
+    def updateDrinkProgressStatus(self, label:QLabel, value:str) -> None:
+        label.setText(value)
+        label.adjustSize()
 
 if __name__ == "__main__":
     bartenderApp = QApplication(sys.argv)
