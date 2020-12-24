@@ -1,29 +1,30 @@
 import json
 import sys
+import time
 from PyQt5.QtWidgets import QApplication, QCheckBox, QLabel, QListWidgetItem, QMainWindow
 from bartender.thread_manager import ThreadManager
 from hardware.gpio_sim import GPIO_SIM
 from hardware.pins import Pins
-from PyQt5.QtCore import pyqtSignal
-
 # import everything from the UIs
 from ui.bartenderGui import *
 class Bartender(QMainWindow):
 
-    def __init__(self) -> None:
+    def __init__(self,args) -> None:
         super().__init__()
+        self.args = args
         self.gui = Ui_MainWindow()
         self.gui.setupUi(self)
         self.gui.progressBar.hide()
+        self.gui.progressStatus.hide()
         self.gui.progressStatus.setText("")
         self.gui.progressBar.setValue(0)
         self.pumpConfiguration = None
-        self.gpioInterface = GPIO_SIM()
+        self.gpioInterface = GPIO_SIM(self.args.sim)
         self.premadeDrinks = {}
+        self.order = "Current Order: "
         self.setupBarKeep()
         self.show()
-        
-    
+          
     def setupBarKeep(self) -> None:
         self.pumpConfiguration = self.readPumpConfiguration()
         self.createPremadeDrinks()
@@ -89,8 +90,9 @@ class Bartender(QMainWindow):
             self.gui.listWidget.addItem(QListWidgetItem(key))
 
     def gitLitClicked(self):
-        self.gpioInterface.pinOff(Pins.GPIO_PIN_11)
+        self.gui.gitlit_button.hide()
         self.gui.progressBar.show()
+        self.gui.progressStatus.show()
         self.gitlitThread = ThreadManager()
         self.gitlitThread.count.connect(self.updateDrinkProgress)
         self.gitlitThread.start()
@@ -136,10 +138,21 @@ class Bartender(QMainWindow):
                                         Pins.GPIO_PIN_22,
                                         Pins.GPIO_PIN_9,
                                         Pins.GPIO_PIN_10])
+            time.sleep(3)
+            self.gpioInterface.pinOff(Pins.GPIO_PIN_11)
+            self.resetGui()
 
     def updateDrinkProgressStatus(self, label:QLabel, value:str) -> None:
         label.setText(value)
         label.adjustSize()
+
+    def resetGui(self):
+        self.gui.progressBar.hide()
+        self.gui.progressStatus.hide()
+        self.gui.progressStatus.setText("")
+        self.gui.progressBar.setValue(0)
+        self.gui.gitlit_button.show()
+
 
 if __name__ == "__main__":
     bartenderApp = QApplication(sys.argv)
