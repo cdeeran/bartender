@@ -122,11 +122,11 @@ class Bartender(QMainWindow):
 
         elif value > 80 and value <= 90:
             self.updateDrinkProgressStatus(self.gui.progressStatus,"Walking drink over to you...")
-            self.gpioInterface.pinOn(Pins.GPIO_PIN_9)
+            self.gpioInterface.pinOn(Pins.GPIO_PIN_10)
 
         elif value > 90 and value <= 99:
             self.updateDrinkProgressStatus(self.gui.progressStatus,"Checking you out ;) ...")
-            self.gpioInterface.pinOn(Pins.GPIO_PIN_10)
+            self.gpioInterface.pinOn(Pins.GPIO_PIN_9)
 
         else:
             self.updateDrinkProgressStatus(self.gui.progressStatus,"Order complete! Thank you!")

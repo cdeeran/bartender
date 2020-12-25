@@ -11,7 +11,7 @@ https://gpiozero.readthedocs.io/en/stable/remote_gpio.html
 This is just a simulation class to test the interface between the 
 bartender gui and the GPIO interface on the Raspberry PI
 '''
-RASPBERRY_PI_IP = "192.168.1.34"
+RASPBERRY_PI_IP = "192.168.1.35"
 class GPIO_SIM:
 
     def __init__(self,sim) -> None:
