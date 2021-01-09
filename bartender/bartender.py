@@ -1,12 +1,22 @@
 import json
 import sys
+import os
+from threading import Thread
 import time
 from PyQt5.QtWidgets import QApplication, QCheckBox, QLabel, QListWidgetItem, QMainWindow
-from bartender.thread_manager import ThreadManager
-from hardware.gpio_sim import GPIO_SIM
+from bartender.thread_manager import ProgressThread, PourDrinkThread
+from hardware.gpio_sim import GpioSim
 from hardware.pins import Pins
+
 # import everything from the UIs
 from ui.bartenderGui import *
+
+if os.name != 'nt':
+    from hardware.gpio_interface import GpioInterface
+
+FLOW_RATE = 60.0/100.0
+
+SHOT_TIME = 50
 class Bartender(QMainWindow):
 
     def __init__(self,args) -> None:
@@ -19,7 +29,11 @@ class Bartender(QMainWindow):
         self.gui.progressStatus.setText("")
         self.gui.progressBar.setValue(0)
         self.pumpConfiguration = None
-        self.gpioInterface = GPIO_SIM(self.args.sim)
+        if self.args.sim == True:
+            self.gpioInterface = GpioSim(self.args.sim)
+        else:
+            if os.name != 'nt':
+                self.gpioInterface = GpioInterface()
         self.premadeDrinks = {}
         self.order = "Current Order: "
         self.setupBarKeep()
@@ -29,14 +43,7 @@ class Bartender(QMainWindow):
         self.pumpConfiguration = self.readPumpConfiguration()
         self.createPremadeDrinks()
         
-        self.gpioInterface.setupPins([  Pins.GPIO_PIN_14,
-                                        Pins.GPIO_PIN_15,
-                                        Pins.GPIO_PIN_18,
-                                        Pins.GPIO_PIN_17,
-                                        Pins.GPIO_PIN_22,
-                                        Pins.GPIO_PIN_9,
-                                        Pins.GPIO_PIN_10,
-                                        Pins.GPIO_PIN_11 ])
+        self.gpioInterface.setupPins(self.pumpConfiguration)
         
 
         '''
@@ -56,9 +63,6 @@ class Bartender(QMainWindow):
         self.updatePremadeDrinkList()
 
         self.gui.gitlit_button.clicked.connect(self.gitLitClicked)
-
-
-
 
     def dumpPumpConfiguration(self) -> None:
         print(self.pumpConfiguration)
@@ -90,56 +94,57 @@ class Bartender(QMainWindow):
             self.gui.listWidget.addItem(QListWidgetItem(key))
 
     def gitLitClicked(self):
+        self.waitTime = 0
+        if self.gui.checkBox.isChecked():
+            for pump in self.pumpConfiguration.keys():
+                print("Selection: {0} Pump Found: {1}".format(self.gui.checkBox.text(),self.pumpConfiguration[pump]["value"]))
+                if self.gui.checkBox.text() == self.pumpConfiguration[pump]["value"]:
+                    self.waitTime = SHOT_TIME * FLOW_RATE
+                    pin = self.pumpConfiguration[pump]["pin"]
+                    #self.pourThread = Thread(target=self.gpioInterface.pourDrink, args=(pin,self.waitTime))
+                    self.pourThread = PourDrinkThread(pin,waitTime=self.waitTime)
+                    self.pourThread.gpioStart.connect(self.gpioInterface.pourDrinkStart)
+                    self.pourThread.gpioFinished.connect(self.gpioInterface.pourDrinkFinish)
+                    break
+                    
+
+        # TODO: Create a good way to do multiple selections
         self.gui.gitlit_button.hide()
         self.gui.progressBar.show()
         self.gui.progressStatus.show()
-        self.gitlitThread = ThreadManager()
+        self.gitlitThread = ProgressThread(waitTime=self.waitTime)
         self.gitlitThread.count.connect(self.updateDrinkProgress)
         self.gitlitThread.start()
+        self.pourThread.start()
 
     def updateDrinkProgress(self,value) -> None:
-        self.gui.progressBar.setValue(value)
-
-        if value <= 10:
+        '''
+        Number are definitely hacked... but whatever it's a nice progress bar
+        '''
+        self.gui.progressBar.setValue(value * 5)
+        
+        if value <= 6:
             self.updateDrinkProgressStatus(self.gui.progressStatus,"Getting bartender's attention...")
-            self.gpioInterface.pinOn(Pins.GPIO_PIN_14)
 
-        elif value > 10 and value <= 20:
+        elif value > 6 and value <= 12:
             self.updateDrinkProgressStatus(self.gui.progressStatus,"Placing order with bartender...")
-            self.gpioInterface.pinOn(Pins.GPIO_PIN_15)
 
-        elif value > 20 and value <= 50:
+        elif value > 12 and value <= 18:
             self.updateDrinkProgressStatus(self.gui.progressStatus,"Getting ingredients together...")
-            self.gpioInterface.pinOn(Pins.GPIO_PIN_18)
 
-        elif value > 50 and value <= 60:
-            self.updateDrinkProgressStatus(self.gui.progressStatus,"Talking with other people instead of pouring your drink...")
-            self.gpioInterface.pinOn(Pins.GPIO_PIN_17)
+        elif value > 18 and value <= 21:
+            self.updateDrinkProgressStatus(self.gui.progressStatus,"Hittin' on the bitches ;)..")
 
-        elif value > 60 and value <= 80:
+        elif value > 21 and value <= 24:
             self.updateDrinkProgressStatus(self.gui.progressStatus,"Pouring your drink...")
-            self.gpioInterface.pinOn(Pins.GPIO_PIN_22)
 
-        elif value > 80 and value <= 90:
-            self.updateDrinkProgressStatus(self.gui.progressStatus,"Walking drink over to you...")
-            self.gpioInterface.pinOn(Pins.GPIO_PIN_10)
-
-        elif value > 90 and value <= 99:
+        elif value > 24 and value <= 27:
             self.updateDrinkProgressStatus(self.gui.progressStatus,"Checking you out ;) ...")
-            self.gpioInterface.pinOn(Pins.GPIO_PIN_9)
 
-        else:
+        if value == self.waitTime:
             self.updateDrinkProgressStatus(self.gui.progressStatus,"Order complete! Thank you!")
-            self.gpioInterface.pinOn(Pins.GPIO_PIN_11)
-            self.gpioInterface.pinsOff([Pins.GPIO_PIN_14,
-                                        Pins.GPIO_PIN_15,
-                                        Pins.GPIO_PIN_18,
-                                        Pins.GPIO_PIN_17,
-                                        Pins.GPIO_PIN_22,
-                                        Pins.GPIO_PIN_9,
-                                        Pins.GPIO_PIN_10])
+            self.gui.progressBar.setValue(100)
             time.sleep(3)
-            self.gpioInterface.pinOff(Pins.GPIO_PIN_11)
             self.resetGui()
 
     def updateDrinkProgressStatus(self, label:QLabel, value:str) -> None:

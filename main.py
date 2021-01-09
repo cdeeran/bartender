@@ -1,8 +1,6 @@
 #! /usr/bin/env python3
 import sys
-import os
 import argparse
-from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication
 from bartender.bartender import Bartender
 
