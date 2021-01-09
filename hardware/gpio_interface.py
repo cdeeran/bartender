@@ -28,7 +28,7 @@ else:
         Initialize the GPIO interface with the Native Factory, this will allow for use to 
         drive pins high and low directly on the PI.
         '''
-        def __init__(self) -> None:
+        def __init__(self,sim = None) -> None:
             super().__init__()
             GPIO.setmode(GPIO.BCM)
             self.gpio_dict = dict.fromkeys(Pins.GPIO_PINS_LIST, None)

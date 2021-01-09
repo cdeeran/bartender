@@ -10,7 +10,7 @@ bartender gui and the GPIO interface on the Raspberry PI
 '''
 class Gpio(ABC):
 
-    def __init__(self,sim) -> None:
+    def __init__(self,sim = None) -> None:
         super().__init__()
 
     @abstractmethod

@@ -30,7 +30,7 @@ class Bartender(QMainWindow):
         self.gui.progressBar.setValue(0)
         self.pumpConfiguration = None
         if self.args.sim == True:
-            self.gpioInterface = GpioSim(self.args.sim)
+            self.gpioInterface = GpioSim(sim = self.args.sim)
         else:
             if os.name != 'nt':
                 self.gpioInterface = GpioInterface()

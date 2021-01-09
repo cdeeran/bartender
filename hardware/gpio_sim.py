@@ -16,7 +16,7 @@ bartender gui and the GPIO interface on the Raspberry PI
 RASPBERRY_PI_IP = "192.168.1.35"
 class GpioSim(Gpio):
 
-    def __init__(self,sim) -> None:
+    def __init__(self,sim = None) -> None:
         '''
         Initialize the simulation interface. If the raspberry pi is
         connected to a breadboard with LEDs and you are SSHing into the pi to run
