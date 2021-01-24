@@ -1,2 +1,2 @@
 from bartender.bartender import Bartender
-from bartender.thread_manager import ThreadManager
+from bartender.thread_manager import PourDrinkThread, ProgressThread

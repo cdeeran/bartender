@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>609</width>
-    <height>274</height>
+    <width>737</width>
+    <height>358</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,14 +21,14 @@
    <widget class="QTabWidget" name="drinkTab">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>0</x>
       <y>10</y>
-      <width>581</width>
-      <height>231</height>
+      <width>721</width>
+      <height>301</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="preMadeDrinkTab">
      <attribute name="title">
@@ -60,8 +60,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>571</width>
-          <height>201</height>
+          <width>711</width>
+          <height>271</height>
          </rect>
         </property>
        </widget>
@@ -72,39 +72,13 @@
      <attribute name="title">
       <string>Custom Drank</string>
      </attribute>
-     <widget class="QLabel" name="label_3">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>10</y>
-        <width>101</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;LIQOUR&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>190</x>
-        <y>10</y>
-        <width>101</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;MIXER&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
      <widget class="QCheckBox" name="checkBox">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>60</y>
-        <width>91</width>
-        <height>17</height>
+        <y>80</y>
+        <width>111</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -121,9 +95,9 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>100</y>
-        <width>91</width>
-        <height>17</height>
+        <y>150</y>
+        <width>101</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
@@ -140,9 +114,9 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>140</y>
-        <width>91</width>
-        <height>17</height>
+        <y>220</y>
+        <width>101</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -158,10 +132,10 @@
      <widget class="QCheckBox" name="checkBox_4">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>60</y>
-        <width>91</width>
-        <height>17</height>
+        <x>170</x>
+        <y>80</y>
+        <width>111</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="font">
@@ -177,10 +151,10 @@
      <widget class="QCheckBox" name="checkBox_5">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>100</y>
-        <width>91</width>
-        <height>17</height>
+        <x>170</x>
+        <y>150</y>
+        <width>101</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
@@ -196,10 +170,10 @@
      <widget class="QCheckBox" name="checkBox_6">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>140</y>
-        <width>91</width>
-        <height>17</height>
+        <x>170</x>
+        <y>220</y>
+        <width>111</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
@@ -212,36 +186,13 @@
        <string>CheckBox</string>
       </property>
      </widget>
-     <widget class="QSpinBox" name="spinBox">
-      <property name="geometry">
-       <rect>
-        <x>420</x>
-        <y>50</y>
-        <width>61</width>
-        <height>41</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5">
-      <property name="geometry">
-       <rect>
-        <x>370</x>
-        <y>10</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;# OF SHOTS!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="gitlit_button">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>110</y>
-        <width>221</width>
-        <height>51</height>
+        <x>410</x>
+        <y>130</y>
+        <width>251</width>
+        <height>71</height>
        </rect>
       </property>
       <property name="font">
@@ -262,10 +213,10 @@
      <widget class="QProgressBar" name="progressBar">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>170</y>
-        <width>341</width>
-        <height>21</height>
+        <x>310</x>
+        <y>120</y>
+        <width>401</width>
+        <height>81</height>
        </rect>
       </property>
       <property name="value">
@@ -275,14 +226,150 @@
      <widget class="QLabel" name="progressStatus">
       <property name="geometry">
        <rect>
-        <x>370</x>
-        <y>170</y>
-        <width>171</width>
-        <height>21</height>
+        <x>310</x>
+        <y>230</y>
+        <width>71</width>
+        <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
       </property>
       <property name="text">
        <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="progressStatus_2">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>20</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+        <underline>true</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>SHOTS</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="progressStatus_3">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>20</y>
+        <width>181</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+        <underline>true</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>DRINK CHOICES</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioShotButton1">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>70</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioShotButton_2">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>70</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>3</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioShotButton_3">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>70</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>2</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioShotButton_4">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>70</y>
+        <width>51</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>4</string>
       </property>
      </widget>
     </widget>
@@ -293,7 +380,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>609</width>
+     <width>737</width>
      <height>21</height>
     </rect>
    </property>
