@@ -125,7 +125,9 @@ class Bartender(QMainWindow):
         self.gui.progressStatus.show()
         gitlitThread = ProgressThread(waitTime=self.waitTime)
         gitlitThread.count.connect(self.updateDrinkProgress)
-        
+        threads.append(gitlitThread)
+
+
         for thread in threads:
             thread.start()
 
