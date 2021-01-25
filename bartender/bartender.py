@@ -103,7 +103,7 @@ class Bartender(QMainWindow):
 
     def gitLitClicked(self):
         self.waitTime = 0
-        threads = []
+        self.threads = []
         for checkBox in self.drinkCheckBoxes:
             if checkBox.isChecked():
                 for pump in self.pumpConfiguration.keys():
@@ -111,24 +111,20 @@ class Bartender(QMainWindow):
                     if checkBox.text() == self.pumpConfiguration[pump]["value"]:
                         self.waitTime = SHOT_TIME * FLOW_RATE
                         pin = self.pumpConfiguration[pump]["pin"]
-                        #self.pourThread = Thread(target=self.gpioInterface.pourDrink, args=(pin,self.waitTime))
                         pourThread = PourDrinkThread(pin,waitTime=self.waitTime)
                         pourThread.gpioStart.connect(self.gpioInterface.pourDrinkStart)
                         pourThread.gpioFinished.connect(self.gpioInterface.pourDrinkFinish)
-                        threads.append(pourThread)
+                        self.threads.append(pourThread)
                         break
                     
-
-        # TODO: Create a good way to do multiple selections
         self.gui.gitlit_button.hide()
         self.gui.progressBar.show()
         self.gui.progressStatus.show()
         gitlitThread = ProgressThread(waitTime=self.waitTime)
         gitlitThread.count.connect(self.updateDrinkProgress)
-        threads.append(gitlitThread)
+        self.threads.append(gitlitThread)
 
-
-        for thread in threads:
+        for thread in self.threads:
             thread.start()
 
     def updateDrinkProgress(self,value) -> None:
