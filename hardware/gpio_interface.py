@@ -1,6 +1,6 @@
-import os
+import platform
 
-if os.name == 'nt':
+if platform.system() != 'Linux':
     '''
     Module RPi.GPIO is not available for windows.
     Thus this python code cannot be compiled.

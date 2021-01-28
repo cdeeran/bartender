@@ -12,15 +12,17 @@ class ProgressThread(QThread):
         self.waitTime = waitTime 
 
     def run(self):
-        count = 0
-        sleepInterval = self.waitTime / 100.0
-        while count < self.waitTime:
-            count += sleepInterval * 10
-            time.sleep(2)
+        count = 0.0
+        sleepInterval = 100.0/self.waitTime
+        while count < 100:
+            count += sleepInterval
+            time.sleep(1)
             self.count.emit(count)
 
 class PourDrinkThread(QThread):
-
+    '''
+    Thread dedicated to the pouring the drink
+    '''
     gpioStart = pyqtSignal(int)
     gpioFinished = pyqtSignal(int)
 
