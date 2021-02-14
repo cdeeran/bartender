@@ -11,7 +11,7 @@
 	},
 	"pump3": {
 		"name": "Pump 3",
-		"pin": 22, 
+		"pin": 23, 
 		"value": "rum"
 	},
 	"pump4": {
@@ -21,12 +21,12 @@
 	},
 	"pump5": {
 		"name": "Pump 5",
-		"pin": 9, 
+		"pin": 25, 
 		"value": "sprite"
 	},
 	"pump6": {
 		"name": "Pump 6",
-		"pin": 11, 
+		"pin": 8, 
 		"value": "orange juice"
 	}
 }
