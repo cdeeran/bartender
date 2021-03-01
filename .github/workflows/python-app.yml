@@ -11,6 +11,7 @@ on:
 
 jobs:
   job1:
+    name: MacOs Test
     runs-on: macos-latest
     strategy:
       # You can use PyPy versions in python-version.
