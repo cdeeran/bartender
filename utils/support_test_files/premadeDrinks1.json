@@ -9,7 +9,7 @@
 	},
 	"rum & coke": {
 		"ingredients": ["rum","coke"],
-		"pour_time":[75,100]
+		"pour_time":[50,100]
 	},
 	"whiskey coke": {
 		"ingredients": ["whiskey","coke"],
@@ -23,7 +23,7 @@
 		"ingredients": ["vodka","sparkeling water"],
 		"pour_time":[50,150]
     },
-    "basic bitch": {
+  "basic bitch": {
 		"ingredients": ["vodka","club soda"],
 		"pour_time":[75,100]
 	}
