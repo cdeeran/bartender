@@ -126,17 +126,25 @@ To launch the Bartender application in the sim enviroment, cd into the bartender
 
 # Photos and More!
 
-> ![Bartender Base](./assets/images/bartenderBase.png)
+> ![Bartender Base](./assets/media/bartenderBase.png)
 > Bartender base
 
-> ![Initial GPIO Testing](./assets/images/initialGpioTesting.gif)
+<!-- > ![Initial GPIO Testing](./assets/media/initialGpioTesting.mp4) -->
+
+> <video src="./assets/media/initialGpioTesting.mp4" width="320" height="200" controls preload></video>
+>
 > Initial GPIO Testing
 
-> ![Initial Board Layout](./assets/images/initialBoardLayout.png)
+> ![Initial Board Layout](./assets/media/initialBoardLayout.png)
 > Initial layout of the electronics board. Had to swap out the stepdown converter as it did not provide in/out connections. I also used a Raspberry PI 3B Model initially, but fried it on first power up with the new step down converter because I didn't set the output voltage properly.
 
-> ![GPIO Test with Touchscreen](./assets/images/gpioTestWithTouchscreen.gif)
+> ![Adding the touchscreen to the electronics board](./assets/media/addingTouchscreenElectronicsBoard.png)
+> Hooking up the touchscreen to the electronics board with GPIO connections to a breadboard with LEDs to blink
+
+> <video src="./assets/media/gpioTestWithTouchscreen.mp4" width="320" height="200" controls preload></video>
+>
 > GPIO Test with Touchscreen
 
-> ![First use of the Bartender](./assets/images/bartenderFirstUse.gif)
+> <video src="./assets/media/bartenderFirstUse.mp4" width="320" height="200" controls preload></video>
+>
 > Using the Bartender for the first time! _**CHEERS!**_
