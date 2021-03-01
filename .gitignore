@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 
 # VS Code
+.DS_Store
 .vscode
 *.code-workspace
