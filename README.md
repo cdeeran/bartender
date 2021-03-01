@@ -142,7 +142,7 @@ To launch the Bartender application in the sim enviroment, cd into the bartender
 >
 > ## Hooking up the touchscreen to the electronics board with GPIO connections to a breadboard with LEDs to blink
 
-> ![GPIO test with touchscreen](./assets/media/gpioTestWithTouchscreen.gif)
+> ![GPIO test with touchscreen](./assets/media/GpioTestWithTouchscreen.gif)
 >
 > ## GPIO test with Touchscreen
 
