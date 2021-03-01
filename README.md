@@ -1,4 +1,4 @@
-![bartender build status](hhttps://github.com/cdeeran/bartender/tree/main/.github/workflows/python-app.yml/badge.svg?branch=main)
+[![Bartender](https://github.com/cdeeran/bartender/actions/workflows/python-app.yml/badge.svg)](https://github.com/cdeeran/bartender/actions/workflows/python-app.yml)
 
 # Bartender
 
