@@ -1,3 +1,5 @@
+![bartender build status](hhttps://github.com/cdeeran/bartender/tree/main/.github/workflows/python-app.yml/badge.svg?branch=main)
+
 # Bartender
 
 Short story... I was hired right out of college as an Embedded Software Engineer lacking **A LOT** of knowledge about writing software to interact with hardware. Through a lot of on the job training, I got comfortable in this field and have found a love for it. I got an idea one day for a Bartender project because I wanted do something with my Raspberry PI's I have received at Hackathons and wanted to deep dive and experiment in the world of Electrical Computer Engineering (ECE) to help strengthen my skill.
