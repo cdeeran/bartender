@@ -1,0 +1,4 @@
+PyQt5>=5.15.3
+pytest>=6.2.2
+pytest-qt>=3.3.0
+gpiozero>=1.5.1

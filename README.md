@@ -60,35 +60,19 @@ I used Tinkercad to create a [7" Touchscreen Mount](https://www.tinkercad.com/th
 
 - [Python v3.6+](https://www.python.org/downloads/)
 
-- [PyQt5](https://pypi.org/project/PyQt5/)
+The following packages are in [requirements.txt](requirements.txt).
 
-  > Windows
-  >
-  > > python -m pip install PyQt5
-  >
-  > Mac/Linux
-  >
-  > > python3 -m pip install PyQt5
+- [PyQt5](https://pypi.org/project/PyQt5/)
 
 - [PyQt5 Designer](https://pypi.org/project/PyQt5Designer/)
 
-  > Windows
-  >
-  > > python -m pip install PyQt5Designer
-  >
-  > Mac/Linux
-  >
-  > > python3 -m pip install PyQt5Designer
-
 - [GPIO Zero](https://gpiozero.readthedocs.io/en/stable/)
 
-  > Windows
-  >
-  > > python -m pip install gpiozero
-  >
-  > Mac/Linux
-  >
-  > > python3 -m pip install gpiozero
+- [pytest](https://pypi.org/project/pytest/)
+
+- [pytest-qt](https://pypi.org/project/pytest-qt/)
+
+> To install packages run: `pip3 install -r requirements.txt`
 
 ### On the Raspberry Pi only
 
@@ -96,7 +80,8 @@ I used Tinkercad to create a [7" Touchscreen Mount](https://www.tinkercad.com/th
 
   > python3 -m pip install RPi.GPIO
 
-  This package is unsupported on Mac and Windows systems
+  This package is unsupported on Mac and Windows systems.
+  May already be installed on raspberry pi.
 
 # Launch Bartender Application
 
