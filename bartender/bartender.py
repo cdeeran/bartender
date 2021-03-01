@@ -7,7 +7,7 @@ import time
 from PyQt5.QtWidgets import QApplication, QCheckBox, QLabel, QListWidgetItem, QMainWindow
 from bartender.thread_manager import ProgressThread, PourDrinkThread
 from hardware.gpio_sim import GpioSim
-from hardware.pins import Pins
+from utils import constants
 
 # import everything from the UIs
 from ui.bartenderGui import *
@@ -15,12 +15,10 @@ from ui.bartenderGui import *
 if platform.system() == 'Linux':
     from hardware.gpio_interface import GpioInterface
 
-FLOW_RATE = 60.0/100.0 #.6
 
-SHOT_TIME = 50
 class Bartender(QMainWindow):
 
-    def __init__(self,args) -> None:
+    def __init__(self, args) -> None:
         super().__init__()
         self.args = args
         self.gui = Ui_MainWindow()
@@ -31,7 +29,7 @@ class Bartender(QMainWindow):
         self.gui.progressBar.setValue(0)
         self.pumpConfiguration = None
         if self.args.sim == True:
-            self.gpioInterface = GpioSim(sim = self.args.sim)
+            self.gpioInterface = GpioSim(sim=self.args.sim)
         else:
             if os.name != 'nt':
                 self.gpioInterface = GpioInterface()
@@ -40,31 +38,35 @@ class Bartender(QMainWindow):
 
         self.drinkCheckBoxes = [self.gui.checkBox,
                                 self.gui.checkBox_2,
-                                self.gui.checkBox_3, 
-                                self.gui.checkBox_4, 
+                                self.gui.checkBox_3,
+                                self.gui.checkBox_4,
                                 self.gui.checkBox_5,
                                 self.gui.checkBox_6]
 
         self.setupBarKeep()
-        self.show()
-          
+
     def setupBarKeep(self) -> None:
-        self.pumpConfiguration = self.readPumpConfiguration()
-        self.createPremadeDrinks()
-        
+        self.pumpConfiguration = self.readPumpConfiguration(constants.PUMP_CONFIG_PATH)
+        self.createPremadeDrinks(constants.PREMADE_DRINKS_PATH)
+
         self.gpioInterface.setupPins(self.pumpConfiguration)
-        
 
         '''
         Set the values of the liquor and mixer options based
         upon the pump configuration
         '''
-        self.updateCustomDrinkBoxes(self.gui.checkBox,self.pumpConfiguration["pump1"]["value"])
-        self.updateCustomDrinkBoxes(self.gui.checkBox_2,self.pumpConfiguration["pump2"]["value"])
-        self.updateCustomDrinkBoxes(self.gui.checkBox_3,self.pumpConfiguration["pump3"]["value"])
-        self.updateCustomDrinkBoxes(self.gui.checkBox_4,self.pumpConfiguration["pump4"]["value"])
-        self.updateCustomDrinkBoxes(self.gui.checkBox_5,self.pumpConfiguration["pump5"]["value"])
-        self.updateCustomDrinkBoxes(self.gui.checkBox_6,self.pumpConfiguration["pump6"]["value"])
+        self.updateCustomDrinkBoxes(
+            self.gui.checkBox, self.pumpConfiguration["pump1"]["value"])
+        self.updateCustomDrinkBoxes(
+            self.gui.checkBox_2, self.pumpConfiguration["pump2"]["value"])
+        self.updateCustomDrinkBoxes(
+            self.gui.checkBox_3, self.pumpConfiguration["pump3"]["value"])
+        self.updateCustomDrinkBoxes(
+            self.gui.checkBox_4, self.pumpConfiguration["pump4"]["value"])
+        self.updateCustomDrinkBoxes(
+            self.gui.checkBox_5, self.pumpConfiguration["pump5"]["value"])
+        self.updateCustomDrinkBoxes(
+            self.gui.checkBox_6, self.pumpConfiguration["pump6"]["value"])
 
         '''
         Set the values of the premade drink list
@@ -77,15 +79,15 @@ class Bartender(QMainWindow):
         print(self.pumpConfiguration)
 
     @staticmethod
-    def readPumpConfiguration() -> json:
-        return json.load(open("./hardware/pump_config.json"))
+    def readPumpConfiguration(path) -> json:
+        return json.load(open(path))
 
-    def createPremadeDrinks(self) -> None:
+    def createPremadeDrinks(self, path) -> None:
         '''
         Determine what premade drinks we can server based upon
         the pump configuration.
         '''
-        tempjson = json.load(open("./bartender/premade_drinks.json"))
+        tempjson = json.load(open(path))
         for drink, ingredient in tempjson.items():
             ingredientCount = 0
             for _, value in self.pumpConfiguration.items():
@@ -94,7 +96,7 @@ class Bartender(QMainWindow):
                 if ingredientCount == len(ingredient["ingredients"]):
                     self.premadeDrinks[drink] = ingredient["ingredients"]
 
-    def updateCustomDrinkBoxes(self,checkbox:QCheckBox, value:str) -> None:
+    def updateCustomDrinkBoxes(self, checkbox: QCheckBox, value: str) -> None:
         checkbox.setText(value)
         checkbox.adjustSize()
 
@@ -108,12 +110,13 @@ class Bartender(QMainWindow):
         for checkBox in self.drinkCheckBoxes:
             if checkBox.isChecked():
                 for pump in self.pumpConfiguration.keys():
-                    print("Selection: {0} Pump Found: {1}".format(checkBox.text(),self.pumpConfiguration[pump]["value"]))
+                    print("Selection: {0} Pump Found: {1}".format(
+                        checkBox.text(), self.pumpConfiguration[pump]["value"]))
                     if checkBox.text() == self.pumpConfiguration[pump]["value"]:
                         '''
                         Wait time is pour time
                         '''
-                        self.waitTime = SHOT_TIME * FLOW_RATE
+                        self.waitTime = constants.SHOT_TIME * constants.FLOW_RATE
                         if self.gui.radioShotButton_2.isChecked():
                             self.waitTime *= 2
                         elif self.gui.radioShotButton_3.isChecked():
@@ -122,12 +125,15 @@ class Bartender(QMainWindow):
                             self.waitTime *= 4
 
                         pin = self.pumpConfiguration[pump]["pin"]
-                        pourThread = PourDrinkThread(pin,waitTime=self.waitTime)
-                        pourThread.gpioStart.connect(self.gpioInterface.pourDrinkStart)
-                        pourThread.gpioFinished.connect(self.gpioInterface.pourDrinkFinish)
+                        pourThread = PourDrinkThread(
+                            pin, waitTime=self.waitTime)
+                        pourThread.gpioStart.connect(
+                            self.gpioInterface.pourDrinkStart)
+                        pourThread.gpioFinished.connect(
+                            self.gpioInterface.pourDrinkFinish)
                         self.threads.append(pourThread)
                         break
-                    
+
         self.gui.gitlit_button.hide()
         self.gui.progressBar.show()
         self.gui.progressStatus.show()
@@ -139,7 +145,7 @@ class Bartender(QMainWindow):
         for thread in self.threads:
             thread.start()
 
-    def updateDrinkProgress(self,value) -> None:
+    def updateDrinkProgress(self, value) -> None:
         '''
         Number are definitely hacked... but whatever it's a nice progress bar
         '''
@@ -147,31 +153,39 @@ class Bartender(QMainWindow):
         print(int(value))
 
         if value <= 15:
-            self.updateDrinkProgressStatus(self.gui.progressStatus,"Getting bartender's attention...")
+            self.updateDrinkProgressStatus(
+                self.gui.progressStatus, "Getting bartender's attention...")
 
         elif value > 15 and value <= 35:
-            self.updateDrinkProgressStatus(self.gui.progressStatus,"Placing order with bartender...")
+            self.updateDrinkProgressStatus(
+                self.gui.progressStatus, "Placing order with bartender...")
 
         elif value > 35 and value <= 55:
-            self.updateDrinkProgressStatus(self.gui.progressStatus,"Getting ingredients together...")
+            self.updateDrinkProgressStatus(
+                self.gui.progressStatus, "Getting ingredients together...")
 
         elif value > 55 and value <= 75:
-            self.updateDrinkProgressStatus(self.gui.progressStatus,"Hittin' on the bitches ;)..")
+            self.updateDrinkProgressStatus(
+                self.gui.progressStatus, "Hittin' on the bitches ;)..")
 
         elif value > 75 and value <= 85:
-            self.updateDrinkProgressStatus(self.gui.progressStatus,"Pouring your drink...")
+            self.updateDrinkProgressStatus(
+                self.gui.progressStatus, "Pouring your drink...")
 
         elif value > 85 and value <= 90:
-            self.updateDrinkProgressStatus(self.gui.progressStatus,"Checking you out ;) ...")
+            self.updateDrinkProgressStatus(
+                self.gui.progressStatus, "Checking you out ;) ...")
 
         if value >= 100:
-            self.updateDrinkProgressStatus(self.gui.progressStatus,"Order complete! Thank you!")
+            self.updateDrinkProgressStatus(
+                self.gui.progressStatus, "Order complete! Thank you!")
             self.gui.progressBar.setValue(100)
             time.sleep(2)
-            print("Process Time: {} seconds".format(time.time() - self.startTime))
+            print("Process Time: {} seconds".format(
+                time.time() - self.startTime))
             self.resetGui()
 
-    def updateDrinkProgressStatus(self, label:QLabel, value:str) -> None:
+    def updateDrinkProgressStatus(self, label: QLabel, value: str) -> None:
         label.setText(value)
         label.adjustSize()
 

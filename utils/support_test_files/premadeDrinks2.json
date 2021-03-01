@@ -1,0 +1,22 @@
+{
+	"screwdriver": {
+		"ingredients": ["vodka","orange juice"],
+		"pour_time":[50,150]
+	},
+	"mimosa": {
+		"ingredients": ["champange","orange juice"],
+		"pour_time":[150,50]
+	},
+	"rum & coke": {
+		"ingredients": ["rum","coke"],
+		"pour_time":[50,100]
+	},
+	"whiskey coke": {
+		"ingredients": ["whiskey","coke"],
+		"pour_time":[50,100]
+	},
+	"snoop dogg": {
+		"ingredients": ["gin","orange juice","grape fruit"],
+		"pour_time":[50,50,50]
+	}
+}
