@@ -1,0 +1,38 @@
+{
+    "pump1": {
+        "name": "Pump 1",
+        "pin": 20,
+        "type": "Alcohol",
+        "value": "gin"
+    },
+    "pump2": {
+        "name": "Pump 2",
+        "pin": 16,
+        "type": "Alcohol",
+        "value": "vodka"
+    },
+    "pump3": {
+        "name": "Pump 3",
+        "pin": 26,
+        "type": "Alcohol",
+        "value": "rum"
+    },
+    "pump4": {
+        "name": "Pump 4",
+        "pin": 13,
+        "type": "Mixer",
+        "value": "club soda"
+    },
+    "pump5": {
+        "name": "Pump 5",
+        "pin": 19,
+        "type": "Mixer",
+        "value": "coke"
+    },
+    "pump6": {
+        "name": "Pump 6",
+        "pin": 12,
+        "type": "Mixer",
+        "value": "OUT-OF-ORDER"
+    }
+}

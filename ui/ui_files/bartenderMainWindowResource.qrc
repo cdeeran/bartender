@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="images">
+    <file>../images/home.svg</file>
+    <file>../images/customDrink.svg</file>
+    <file>../images/premadeDrink.svg</file>
+    <file>../images/spotify-logo.svg</file>
+    <file>../images/settings.svg</file>
+  </qresource>
+</RCC>

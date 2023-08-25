@@ -1,0 +1,30 @@
+{
+	"screwdriver": {
+		"ingredients": ["vodka","orange juice"],
+		"pour_time":[50,150]
+	},
+	"mimosa": {
+		"ingredients": ["champange","orange juice"],
+		"pour_time":[150,50]
+	},
+	"rum & coke": {
+		"ingredients": ["rum","coke"],
+		"pour_time":[50,100]
+	},
+	"whiskey coke": {
+		"ingredients": ["whiskey","coke"],
+		"pour_time":[50,100]
+	},
+	"gin n tonic": {
+		"ingredients": ["gin","tonic"],
+		"pour_time":[50,150]
+	},
+	"white girl": {
+		"ingredients": ["vodka","sparkeling water"],
+		"pour_time":[50,150]
+    },
+  "basic bitch": {
+		"ingredients": ["vodka","club soda"],
+		"pour_time":[75,100]
+	}
+}

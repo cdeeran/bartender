@@ -1,0 +1,10 @@
+PyQt5>=5.15.3
+spotipy>=2.18.0
+pytest>=6.2.2
+pytest-qt>=3.3.0
+gpiozero>=1.5.1
+pigpio>=1.78
+
+
+# RPI GPIO can only be installed on Raspberry Pis. 
+#Rpi.GPIO>=0.7.0

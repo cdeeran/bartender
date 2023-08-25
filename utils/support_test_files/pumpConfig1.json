@@ -1,0 +1,32 @@
+{
+	"pump1": {
+		"name": "Pump 1",
+		"pin": 17, 
+		"value": "whiskey"
+	},
+	"pump2": {
+		"name": "Pump 2",
+		"pin": 27, 
+		"value": "vodka"
+	},
+	"pump3": {
+		"name": "Pump 3",
+		"pin": 23, 
+		"value": "rum"
+	},
+	"pump4": {
+		"name": "Pump 4",
+		"pin": 10, 
+		"value": "coke"
+	},
+	"pump5": {
+		"name": "Pump 5",
+		"pin": 25, 
+		"value": "sprite"
+	},
+	"pump6": {
+		"name": "Pump 6",
+		"pin": 8, 
+		"value": "orange juice"
+	}
+}

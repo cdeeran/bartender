@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="images">
+    <file>../images/checkbox-checked.svg</file>
+    <file>../images/checkbox-unchecked.svg</file>
+    <file>../images/radio-checked.svg</file>
+    <file>../images/radio-unchecked.svg</file>
+    <file>../images/clear.svg</file>
+    <file>../images/save.svg</file>
+    <file>../images/mixit-icon.svg</file>
+  </qresource>
+</RCC>

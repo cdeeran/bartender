@@ -1,0 +1,10 @@
+<RCC>
+  <qresource prefix="images">
+    <file>../images/make-drink-icon.svg</file>
+    <file>../images/arrows.svg</file>
+    <file>../images/arrows-rotated.svg</file>
+    <file>../images/radio-checked.svg</file>
+    <file>../images/radio-unchecked.svg</file>
+    <file>../images/makePremadeDrink.svg</file>
+  </qresource>
+</RCC>
